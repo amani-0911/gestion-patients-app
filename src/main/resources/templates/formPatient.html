@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymLeaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+layout:decorator="template">
+
+<head>
+<meta charset="utf-8">
+<title>Form patients</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="container mt-5">
+<div class="alert alert-success" th:if="${message != null}">
+<p th:text="${message}"> </p>
+</div>
+<div class="card">
+<div class="card-header" th:if="${mode=='new'}">Formilaire d'ajout d'un patients</div>
+<div class="card-header" th:if="${mode=='edit'}">Formilaire de mise a jour d'un patients</div>
+<div class="card-body">
+<form th:action="@{savePatient}" method="POST">
+<div class="form-group">
+<label class="control-label">ID:</label> 
+<label class="control-label" th:text="${patient.id}"></label>
+<input type="hidden" class="form-control" th:value="${patient.id}" name="id">
+</div>
+<div class="form-group">
+<label class="control-label">Nom</label>
+<input type="text" class="form-control" th:value="${patient.nom}" name="nom">
+<span class="text-danger" th:errors=${patient.nom}></span>
+</div>
+<div class="form-group">
+<label class="control-label">Date naissance</label>
+<input type="date" class="form-control" th:value="${patient.dateNaissance}" name="dateNaissance">
+<span class="text-danger" th:errors=${patient.dateNaissance}></span>
+</div>
+<div class="form-group">
+<label class="control-label">score</label>
+<input type="text" class="form-control" th:value="${patient.score}"  name="score">
+<span class="text-danger" th:errors=${patient.score}></span>
+</div>
+<div class="form-group">
+<label class="control-label">Malade</label>
+<input type="checkbox" class="form-checkbox" th:checked="${patient.malade}"name="malade">
+<span class="text-danger" th:errors=${patient.malade}></span>
+</div>
+<button class="btn btn-primary float-right" type="submit">Enregistrer</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
